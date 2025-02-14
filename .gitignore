@@ -1,0 +1,16 @@
+.idea/
+get-docker.sh
+.dist/
+
+# Editor directories and files*
+node_modules
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode

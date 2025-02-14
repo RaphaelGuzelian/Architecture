@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  userservice:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+
+  activemq:
+    image: rmohr/activemq
+    networks:
+      - my_network
+
+  superservice:
+    build:
+      context: ./SuperService
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+
+  notificationservice:
+    build:
+      context: ./NotificationService
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+
+  staticservice:
+    build:
+      context: ./StaticService
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - my_network
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - userservice
+      - staticservice
+      - superservice
+      - notificationservice
+
+networks:
+  my_network:
+    driver: bridge
